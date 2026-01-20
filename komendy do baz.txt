@@ -1,0 +1,65 @@
+Ćw 3
+Zad1 
+create table pracownik(
+id_pracownika INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
+imie VARCHAR (40) NOT NULL,
+nazwisko VARCHAR(60) NOT NULL,
+data_urodzenia DATE NOT NULL
+); 
+insert into pracownik (imie, nazwisko, data_urodzenia) values ('Stefan', 'Kowalski', '1853-07-15');
+upadte pracownik set data_urodzenia = "1970-04-03" where id_pracownik = "2";
+Zad2
+create table zadania(
+id_zadania INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
+nazwa_zadania VARCHAR(150) NOT NULL,
+priorytet ENUM ('normalny', 'wysoki', 'niski'),
+opis LONGTEXT,
+pracownik INT
+);
+Alter table zadania modify column ENUM('normalny');
+insert into zadania (nazwa_zadania) values ('wydrukowac_zdjecia');
+Zad3
+create table projekt(
+id_projektu INT PRIMARY KEY AUTO_INCREMENT,
+nazwa_projektu VARCHAR(150) not NULL,
+data_rozpocz DATE NOT NULL,
+data_zakonczenia DATE,
+);
+alter table projekt add  menadzer_projektu INT;
+insert into projekt (nazwa_projektu, data_ropoczencia) values ('jak rozpocząć zwiekszenie przychodów z sprzedarzy nieletnich', '2025-04-29');
+alter table zadania add column projekt INT;
+alter table zadania add foreign key (projekt_id) references projekt(id_projekt) ON DELETE CASCADE;
+zad4 
+create table sprint(
+id_psrintu IN PRIMARY KEY AUTO_INCREMENT,
+numer_sprintu INT,
+data_rozpoczecia DATA,
+data_zakonczenia DATA
+);
+
+
+
+Ćw4
+Zad1
+- Alter table zadanie/projetk  Drop foreign key;
+- Alter table pracownik drop primary key;
+- alter table pracownik Add primary key (id_pracownika);
+- alter table zadania add foreign key (projekt_id) references projekt(id_projekt) ON DELETE SET NULL;
+Zad2 
+- Alter table zadania ADD COLUMN godzina szacowane INT(8);
+- insert into zadania (godziny_szacowane) values ('4/12/16')
+- Alter table zadania ALTER COLUMN godziny_szacowane SET DEFOULT 6;
+- insert into zadania (nazwa_zadania, priorytet, opis) values('wydrukowac_zdjecia','normalny','trzeba_wudrukowac_zdjecia_nowych_produktow'); 
+- DELETE FROM zadania Where godziny_szacowane = 6;
+
+Zad3
+- Alter table projekt ADD COLUMN opis_kratki VARCHAR(50);
+- Alter table projekt MODIFY opis_kratki VARCHAR (200);
+- UPDATE projekt SET opis_kratki ;
+- ALTER TABLE projekt DROP COLUMN opis_kratki;
+
+Zad4
+- ALTER TABLE zadania DROP FOREING KEY projekt_id;
+- alter table zadania add foreign key (projekt_id) references projekt(id_projekt) ON DELETE SET NULL;
+- DELETE FROM projekt WHERE id_projektu = 1
+- select 
